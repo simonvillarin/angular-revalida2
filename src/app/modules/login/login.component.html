@@ -1,0 +1,43 @@
+<div class="loginContainer  px-4"> 
+    <div class="row gx-5">
+        <div class="col-sm col1 m-4">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" name="loginForm" class="loginform">
+                <div class="title">
+                    <h1>Sign in</h1>
+                </div>
+                <!-- Username -->
+                <label class="inputLbl">Username*</label>
+                <input type="text" class="form-control border-bottom" formControlName="username" required>
+                <!-- Validation -->
+                <div class="validation" *ngIf="username?.invalid && username?.dirty && username?.errors?.['required']" >
+                    Username is required.
+                </div>
+
+                <!-- Password -->
+                <label class="inputLbl">Password*</label>
+                <input type="password" class="form-control border-bottom" formControlName="password" required>
+                <!-- Validation -->
+                <div class="validation" *ngIf="password?.invalid && password?.dirty">
+                    <div *ngIf="password?.errors?.['required']">Password is required.</div>
+                    <div *ngIf="password?.errors?.['minlength']">Password must be 8 characters and above.</div>
+                    <div *ngIf="password?.errors?.['hasUppercase']">It must contain an uppercase letter.</div>
+                    <div *ngIf="password?.errors?.['hasLowercase']">It must contain a lowercase letter.</div>
+                    <div *ngIf="password?.errors?.['hasNumber']">It must contain a number.</div>
+                </div>
+                <button type="submit" class="btn btn-success loginbtn">Login</button>
+                <div class="linkBtnCont">
+                    <button type="button" class="btn btn-link" (click)="forgotPassword()">Forgot Password</button>
+                    <button type="button" class="btn btn-link" (click)="signUp()">Sign Up</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm col2">
+            <div>
+                <img src='assets/images/img.svg'/>
+            </div>
+            <h1>Sign in to TechHunt</h1>
+            <h5>Your go to shop.</h5>
+        </div>
+    </div>
+    
+</div>
