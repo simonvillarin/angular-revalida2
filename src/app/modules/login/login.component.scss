@@ -1,0 +1,114 @@
+.loginContainer {
+    width: 99%;
+    padding: 20px;
+    text-align: center;
+    max-height: 900px;
+}
+
+.col1 {
+    min-width: 150px;
+    max-width: 90%;
+} 
+
+.title {
+    text-align: left;
+    margin-bottom: 50px;
+}
+
+.title h1{
+    font-weight: 600;
+    color: rgb(7, 147, 65);
+}
+
+.title h1:hover{
+    color: rgb(33, 223, 112);
+}
+
+.loginform {
+    max-width: 400px;
+    padding: 0px;
+    margin: 0px 52px 0px 52px;
+}
+
+.form-control {
+    height: 40px;
+    border-radius: 0px;
+    border: none;
+}
+
+.form-control:focus {
+    box-shadow: inset 0px -10px 10px -10px rgba(198, 253, 211, 0.75);
+} 
+
+// form validation
+.validation {
+    color: red;
+    text-align: left;
+    justify-content: left;
+    align-items: left;
+    margin: 5px 0px 5px 0px;
+}
+
+.loginbtn {
+    width: 100%;
+    margin-top: 50px;
+    border-radius: 20px;
+}
+
+.inputLbl {
+    margin-top: 25px;
+    color: gray;
+    text-align: left;
+    float: left;
+}
+
+.inputLbl:hover {
+    color: rgb(35, 33, 33);
+}
+
+.linkBtnCont {
+   margin-top: 45px;
+}
+
+.btn-link {
+    text-decoration: none;
+    color: rgb(48, 117, 48);
+}
+
+.btn-link:hover {
+    color: rgb(13, 190, 13);
+    font-weight: 500;
+}
+
+.col2 {
+    background-color: rgb(4, 146, 73);
+    padding-top: 60px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.col2 div{
+    margin-top: 40px;
+    object-fit: contain;
+}
+.col2 div img {
+    max-width: 350px;
+    height: auto;
+}
+
+.col2 h1 {
+    color: aliceblue;
+    margin: 70px 60px 0px 40px ;
+    text-align: left;
+}
+
+.col2:hover {
+    opacity: 0.9;
+}
+
+.col2 h5 {
+    color: aliceblue;
+    margin: 0px 60px 95px 40px;
+    text-align: left;
+}
