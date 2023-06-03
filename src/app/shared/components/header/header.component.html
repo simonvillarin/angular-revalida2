@@ -1,0 +1,31 @@
+<header>
+  <div class="container">
+    <div class="icon" id="menu" (click)="toggleMenu()">
+      <i class="bi bi-list" *ngIf="!isShowMenu"></i>
+      <i class="bi bi-x" *ngIf="isShowMenu"></i>
+    </div>
+    <div class="logo">LOGO</div>
+    <div class="nav-list" [class.show-nav]="isShowMenu">
+      <li class="nav-item">
+        <a class="nav-link">HOME</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link">COMPUTERS</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link">COMPONENTS</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link">PERIPHERALS</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link">CONTACTS</a>
+      </li>
+    </div>
+    <div class="icons">
+      <div class="icon"><i class="bi bi-search"></i><span>Search</span></div>
+      <div class="icon"><i class="bi bi-cart2"></i><span>Cart</span></div>
+      <div class="icon"><i class="bi bi-person"></i><span>Profile</span></div>
+    </div>
+  </div>
+</header>
