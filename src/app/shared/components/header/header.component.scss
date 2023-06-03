@@ -1,0 +1,114 @@
+header {
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  background-color: rgb(76, 175, 80);
+  color: #fff;
+  z-index: 100;
+}
+
+.container {
+  min-height: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  cursor: pointer;
+}
+
+.icons {
+  display: flex;
+  gap: 1rem;
+  font-size: 1.125rem;
+}
+
+.icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 100vmax;
+  background-color: rgba(255, 255, 255);
+  color: rgb(76, 175, 80);
+  cursor: pointer;
+  transition: width 300ms ease-in;
+}
+
+.icon:hover {
+  width: 6rem;
+}
+
+.icon:hover > span {
+  display: block;
+}
+
+.icon > span {
+  display: none;
+  font-size: 0.75rem;
+}
+
+.dropdown {
+  position: absolute;
+  top: 200%;
+  left: 0;
+  width: 15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background-color: rgb(76, 175, 80);
+  padding: 0.5rem 1rem;
+}
+
+#menu {
+  display: none;
+  font-size: 1.5rem;
+}
+
+.bi-x {
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 900px) {
+  #menu {
+    display: flex;
+  }
+
+  .icon:hover {
+    width: 2.5rem;
+  }
+
+  .icon:hover > span {
+    display: none;
+  }
+
+  .nav-list {
+    position: absolute;
+    top: 4rem;
+    left: 0;
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    padding: 1.5rem;
+    background-color: rgb(76, 175, 80);
+    z-index: 100;
+  }
+
+  .show-nav {
+    display: flex;
+  }
+}
