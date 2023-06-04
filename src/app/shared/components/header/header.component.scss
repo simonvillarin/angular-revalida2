@@ -4,6 +4,7 @@ header {
   background-color: rgb(76, 175, 80);
   color: #fff;
   z-index: 100;
+  font-weight: 300;
 }
 
 .container {
@@ -12,6 +13,10 @@ header {
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
+}
+
+.logo {
+  letter-spacing: 1px;
 }
 
 .nav-list {
@@ -26,6 +31,7 @@ header {
 }
 
 .nav-link {
+  letter-spacing: 1px;
   cursor: pointer;
 }
 
@@ -43,8 +49,9 @@ header {
   align-items: center;
   gap: 0.5rem;
   border-radius: 100vmax;
-  background-color: rgba(255, 255, 255);
-  color: rgb(76, 175, 80);
+  border: 1px solid rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+  overflow: hidden;
   cursor: pointer;
   transition: width 300ms ease-in;
 }
@@ -53,13 +60,13 @@ header {
   width: 6rem;
 }
 
-.icon:hover > span {
-  display: block;
-}
-
 .icon > span {
   display: none;
   font-size: 0.75rem;
+}
+
+.icon:hover > span {
+  display: block;
 }
 
 .dropdown {

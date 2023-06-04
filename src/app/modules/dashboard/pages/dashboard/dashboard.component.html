@@ -1,0 +1,27 @@
+<div class="wrapper">
+  <div class="sidebar">
+    <div class="logo">Logo</div>
+    <nav>
+      <div class="link" routerLink="/dashboard">
+        <mat-icon fontIcon="dashboard"></mat-icon>Dashboard
+      </div>
+      <div class="link" routerLink="products">
+        <mat-icon fontIcon="inventory"></mat-icon>Products
+      </div>
+      <div class="link" routerLink="users">
+        <mat-icon fontIcon="person"></mat-icon>Users
+      </div>
+    </nav>
+  </div>
+  <main>
+    <header>
+      <div class="location">Dashboard</div>
+      <div class="icon">
+        <mat-icon fontIcon="person"></mat-icon><span>Logout</span>
+      </div>
+    </header>
+    <div class="main-container">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>
