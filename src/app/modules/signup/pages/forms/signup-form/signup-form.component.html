@@ -1,0 +1,174 @@
+<div class="container-grid">
+    <mat-card class="example-card">
+        <!-- Title -->
+        <mat-toolbar class="toolBar">
+            <span>
+                <mat-card-title class="text-center">Sign up</mat-card-title>
+            </span>
+        </mat-toolbar>
+        <!-- Form -->
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+            <mat-horizontal-stepper labelPosition="bottom" linear="isPersonalInfoValid()" #stepper>
+                <!-- Step 1 Personal Info -->
+                <mat-step [stepControl]="personalInfoForm" label="Personal Information">
+                    <mat-card-content class="cardContent">
+                        <!-- Firstname -->
+                        <form [formGroup]="personalInfoForm">
+                            <div class="example-container">
+                                <mat-form-field appearance="outline" class="formField">
+                                    <mat-icon matPrefix>person</mat-icon>
+                                    <mat-label>Firstname</mat-label>
+                                    <input matInput formControlName="firstName" required>
+                                    <mat-error
+                                        *ngIf="personalInfoForm.get('firstName')?.invalid && personalInfoForm.get('firstName')?.touched">
+                                        Firstname is Required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <!-- Lastname -->
+                            <div class="example-container">
+                                <mat-form-field appearance="outline" class="formField">
+                                    <mat-icon matPrefix>person</mat-icon>
+                                    <mat-label>Lastname</mat-label>
+                                    <input matInput formControlName="lastName" required>
+                                    <mat-error
+                                        *ngIf="personalInfoForm.get('lastName')?.invalid && personalInfoForm.get('lastName')?.touched">
+                                        Lastname is Required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <!-- Middlename -->
+                            <div class="example-container">
+                                <mat-form-field appearance="outline" class="formField">
+                                    <mat-icon matPrefix>person</mat-icon>
+                                    <mat-label>Middlename</mat-label>
+                                    <input matInput formControlName="middleName">
+                                </mat-form-field>
+                            </div>
+                            <!-- Birthday -->
+                            <div class="example-container">
+                                <mat-form-field appearance="outline" class="formField">
+                                    <mat-label>Birthday</mat-label>
+                                    <input matInput [matDatepicker]="picker" formControlName="birthdate"
+                                        [value]="formatDate(selectedDate)">
+                                    <mat-icon matPrefix>calendar_today</mat-icon>
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                    <mat-error
+                                        *ngIf="personalInfoForm.get('birthdate')?.invalid && (personalInfoForm.get('birthdate')?.dirty || personalInfoForm.get('birthdate')?.touched)">
+                                        Birthday is required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <!-- Interests -->
+                            <div class="example-container">
+                                <mat-form-field appearance="outline" class="formField">
+                                    <mat-label>Interest</mat-label>
+                                    <input #interestInput placeholder="New Interest..." [formControl]="interestCtrl"
+                                        [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+                                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                        (matChipInputTokenEnd)="add($event)" />
+                                    <mat-chip-grid #chipGrid aria-label="Interest selection">
+                                        <mat-chip-row *ngFor="let interest of interests" (removed)="remove(interest)">
+                                            {{ interest }}
+                                            <button matChipRemove [attr.aria-label]="'remove ' + interest">
+                                                <mat-icon>cancel</mat-icon>
+                                            </button>
+                                        </mat-chip-row>
+                                    </mat-chip-grid>
+                                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                                        <mat-option *ngFor="let interest of filteredInterests | async"
+                                            [value]="interest">
+                                            {{ interest }}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+                                <mat-error
+                                    *ngIf="interests.length < 3 && (interestCtrl?.invalid || interestCtrl?.touched || interestCtrl?.dirty)">
+                                    Select Atleast 3 Interests
+                                </mat-error>
+                            </div>
+                        </form>
+                    </mat-card-content>
+                    <mat-divider></mat-divider>
+                    <mat-card-actions class="actions">
+                        <button mat-raised-button color="primary" type="button" class="btn" 
+                                matStepperNext 
+                                [disabled]="personalInfoForm.invalid || interests.length < 3">
+                            Next
+                        </button>
+                    </mat-card-actions>
+                </mat-step>
+
+                <!-- Step 2 Login Credentials -->
+                <mat-step [stepControl]="loginCredentialForm" label="Login Credentials">
+                    <mat-card-content class="cardContent">
+                        <form [formGroup]="loginCredentialForm">
+                            <!-- Email -->
+                            <div class="example-container">
+                                <mat-form-field appearance="outline" class="formField">
+                                    <mat-label>Enter email</mat-label>
+                                    <input matInput type="email" placeholder="email@example.com" formControlName="email"
+                                        required>
+                                    <mat-icon matPrefix>email</mat-icon>
+                                    <mat-error *ngIf="loginCredentialForm.get('email')?.invalid">Invalid
+                                        email</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <!-- Username -->
+                            <div class="example-container">
+                                <mat-form-field appearance="outline" class="formField">
+                                    <mat-icon matPrefix>person</mat-icon>
+                                    <mat-label>Username</mat-label>
+                                    <input matInput formControlName="username" required>
+                                    <mat-error
+                                        *ngIf="loginCredentialForm.get('username')?.invalid && loginCredentialForm.get('username')?.touched">
+                                        Username is Required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <!-- Password -->
+                            <div class="example-container">
+                                <mat-form-field appearance="outline" class="formField">
+                                    <mat-label>Password</mat-label>
+                                    <input matInput [type]="showPassword ? 'text' : 'password'" name="password"
+                                        formControlName="password" required>
+                                    <mat-icon matPrefix>lock</mat-icon>
+                                    <mat-icon matSuffix (click)="togglePasswordVisibility()">visibility</mat-icon>
+                                    <mat-error
+                                        *ngIf="loginCredentialForm.get('password')?.invalid && loginCredentialForm.get('password')?.touched">
+                                        Password is Required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <!-- Confirm Password -->
+                            <div class="example-container">
+                                <mat-form-field appearance="outline" class="formField">
+                                    <mat-label>Confirm Password</mat-label>
+                                    <input matInput [type]="showConfirmPassword ? 'text' : 'password'"
+                                        formControlName="confirmPass" required>
+                                    <mat-icon matPrefix>lock</mat-icon>
+                                    <mat-icon matSuffix
+                                        (click)="toggleConfirmPasswordVisibility()">visibility</mat-icon>
+                                    <mat-error
+                                        *ngIf="loginCredentialForm.get('confirmPass')?.errors?.['passwordMismatch']">
+                                        Passwords do not match
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </form>
+                    </mat-card-content>
+                    <mat-divider></mat-divider>
+                     <!-- Buttons -->
+                     <mat-card-actions class="actions">
+                        <button mat-raised-button color="accent" type="button" class="btn"
+                            matStepperPrevious>Back</button>
+                        <button mat-raised-button color="warn" type="button" class="btn"
+                            (click)="stepper.reset()">Reset</button>
+                        <button mat-raised-button color="primary" class="btn" [disabled]="loginCredentialForm.invalid">Sign Up</button>
+                    </mat-card-actions>
+                </mat-step>
+            </mat-horizontal-stepper>
+        </form>
+    </mat-card>
+</div>
