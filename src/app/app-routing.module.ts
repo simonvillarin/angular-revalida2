@@ -47,6 +47,13 @@ const routes: Routes = [
         (m) => m.UserListModule
       ),
   },
+  {
+    path: '',
+    loadChildren: () =>
+    import('./modules/signup/signup.module').then(
+      (m) => m.SignupModule
+    )
+  }
 ];
 
 @NgModule({
