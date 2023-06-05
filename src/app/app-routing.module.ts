@@ -33,6 +33,20 @@ const routes: Routes = [
         (m) => m.DashboardModule
       ),
   },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./modules/product-list/product-list.module').then(
+        (m) => m.ProductListModule
+      ),
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./modules/user-list/user-list.module').then(
+        (m) => m.UserListModule
+      ),
+  },
 ];
 
 @NgModule({
