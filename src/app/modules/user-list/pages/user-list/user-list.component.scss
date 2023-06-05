@@ -105,10 +105,6 @@ header {
   transition: width 300ms ease-in;
 }
 
-.icon {
-  display: none;
-}
-
 .icon:hover {
   width: 6rem;
 }
@@ -130,8 +126,12 @@ i {
   font-size: 1.5rem;
 }
 
+.icon-menu {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
-  .icon {
+  .icon-menu {
     display: flex;
   }
 
@@ -166,5 +166,9 @@ i {
 
   .icon:hover span {
     display: none;
+  }
+
+  .icon-profile {
+    display: flex;
   }
 }
