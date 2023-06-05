@@ -53,6 +53,21 @@ const routes: Routes = [
     import('./modules/signup/signup.module').then(
       (m) => m.SignupModule
     )
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./modules/orders/orders.module').then(m => m.OrdersModule)
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./modules/order-details/order-details.module').then(m => m.OrderDetailsModule)
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./modules/cart-page/cart-page.module').then(m => m.CartPageModule)
   }
 ];
 
