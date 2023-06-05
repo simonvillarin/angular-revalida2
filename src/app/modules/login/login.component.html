@@ -1,43 +1,73 @@
-<div class="loginContainer  px-4"> 
-    <div class="row gx-5">
-        <div class="col-sm col1 m-4">
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" name="loginForm" class="loginform">
-                <div class="title">
-                    <h1>Sign in</h1>
-                </div>
-                <!-- Username -->
-                <label class="inputLbl">Username*</label>
-                <input type="text" class="form-control border-bottom" formControlName="username" required>
-                <!-- Validation -->
-                <div class="validation" *ngIf="username?.invalid && username?.dirty && username?.errors?.['required']" >
-                    Username is required.
-                </div>
+<div class="wrapper">
+  <div class="ball1"></div>
+  <div class="ball2"></div>
+  <div class="ball3"></div>
+  <div class="ball4"></div>
+  <div class="ball5"></div>
+  <div class="ball6"></div>
+  <div class="container">
+    <div class="form-container">
+      <div class="title">
+        <h1>Sign In</h1>
+      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" name="loginForm">
+        <!-- Username -->
+        <div class="group">
+          <label class="inputLbl">Username</label>
+          <input
+            type="text"
+            class="form-control border-bottom"
+            formControlName="username"
+            required
+          />
+          <!-- Validation -->
+          <div
+            class="validation"
+            *ngIf="username?.invalid && username?.dirty && username?.errors?.['required']"
+          >
+            Username is required.
+          </div>
+        </div>
 
-                <!-- Password -->
-                <label class="inputLbl">Password*</label>
-                <input type="password" class="form-control border-bottom" formControlName="password" required>
-                <!-- Validation -->
-                <div class="validation" *ngIf="password?.invalid && password?.dirty">
-                    <div *ngIf="password?.errors?.['required']">Password is required.</div>
-                    <div *ngIf="password?.errors?.['minlength']">Password must be 8 characters and above.</div>
-                    <div *ngIf="password?.errors?.['hasUppercase']">It must contain an uppercase letter.</div>
-                    <div *ngIf="password?.errors?.['hasLowercase']">It must contain a lowercase letter.</div>
-                    <div *ngIf="password?.errors?.['hasNumber']">It must contain a number.</div>
-                </div>
-                <button type="submit" class="btn btn-success loginbtn">Login</button>
-                <div class="linkBtnCont">
-                    <button type="button" class="btn btn-link" (click)="forgotPassword()">Forgot Password</button>
-                    <button type="button" class="btn btn-link" (click)="signUp()">Sign Up</button>
-                </div>
-            </form>
-        </div>
-        <div class="col-sm col2">
-            <div>
-                <img src='assets/images/img.svg'/>
+        <div class="group">
+          <!-- Password -->
+          <label class="inputLbl">Password</label>
+          <input
+            type="password"
+            class="form-control border-bottom"
+            formControlName="password"
+            required
+          />
+          <!-- Validation -->
+          <div class="validation" *ngIf="password?.invalid && password?.dirty">
+            <div *ngIf="password?.errors?.['required']">
+              Password is required.
             </div>
-            <h1>Sign in to TechHunt</h1>
-            <h5>Your go to shop.</h5>
+            <div *ngIf="password?.errors?.['minlength']">
+              Password must be 8 characters and above.
+            </div>
+            <div *ngIf="password?.errors?.['hasUppercase']">
+              It must contain an uppercase letter.
+            </div>
+            <div *ngIf="password?.errors?.['hasLowercase']">
+              It must contain a lowercase letter.
+            </div>
+            <div *ngIf="password?.errors?.['hasNumber']">
+              It must contain a number.
+            </div>
+          </div>
         </div>
+        <div class="forgot-password">Forgot Password?</div>
+        <button type="submit" class="btn btn-success loginbtn">Sign In</button>
+      </form>
+      <div class="no-acc">Don't have an account? <span>Sign up</span></div>
     </div>
-    
+  </div>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+    <path
+      fill="#ffffff"
+      fill-opacity="1"
+      d="M0,224L48,197.3C96,171,192,117,288,101.3C384,85,480,107,576,144C672,181,768,235,864,224C960,213,1056,139,1152,122.7C1248,107,1344,149,1392,170.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+    ></path>
+  </svg>
 </div>
