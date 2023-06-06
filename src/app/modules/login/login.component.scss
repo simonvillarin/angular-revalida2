@@ -9,6 +9,7 @@ svg {
   position: absolute;
   bottom: 0;
   left: 0;
+  z-index: 5;
 }
 
 .container {
@@ -25,6 +26,7 @@ svg {
   padding: 2rem;
   border-radius: 0.25rem;
   background-color: rgb(255, 255, 255);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
   z-index: 10;
 }
 
@@ -97,115 +99,40 @@ button {
   text-decoration: underline;
 }
 
-.ball1,
-.ball2,
-.ball3,
-.ball4,
-.ball5,
-.ball6 {
+.ball1 {
   border-radius: 50%;
   background-color: rgb(255, 255, 255);
   position: absolute;
 }
 
 .ball1 {
-  width: 100px;
-  height: 100px;
-  bottom: 25rem;
-  right: 16rem;
+  width: 10rem;
+  height: 10rem;
+  top: 10%;
+  left: 8%;
+  transform: translate(-8%, -10%);
   animation: float1 2s infinite alternate;
 }
 
-.ball2 {
-  width: 200px;
-  height: 200px;
-  top: 20rem;
-  right: 20rem;
-  animation: float2 2s infinite alternate;
-}
-
-.ball3 {
-  width: 150px;
-  height: 150px;
-  top: 60rem;
-  right: 45rem;
-  animation: float3 2s infinite alternate;
-}
-
-.ball4 {
-  width: 220px;
-  height: 220px;
-  bottom: 50rem;
-  left: 17rem;
-  animation: float4 2s infinite alternate;
-}
-
-.ball5 {
-  width: 120px;
-  height: 120px;
-  bottom: 100rem;
-  right: 66rem;
-  animation: float5 2s infinite alternate;
-}
-
-.ball6 {
-  width: 100px;
-  height: 100px;
-  top: 84rem;
-  left: 15rem;
-  animation: float6 2s infinite alternate;
-}
-
 @keyframes float1 {
-  from {
-    transform: translate(33%, 80%);
+  0% {
+    top: 20%;
+    left: 12%;
+    transform: translate(-12%, -20%);
   }
-  to {
-    transform: translate(-88%, -45%);
+  25% {
+    top: 40%;
+    left: 10%;
+    transform: translate(-10%, -40%);
   }
-}
-
-@keyframes float2 {
-  from {
-    transform: translate(25%, 56%);
+  50% {
+    top: 30%;
+    left: 15%;
+    transform: translate(-15%, -30%);
   }
-  to {
-    transform: translate(-79%, -35%);
-  }
-}
-
-@keyframes float3 {
-  from {
-    transform: translate(91%, 40%);
-  }
-  to {
-    transform: translate(-32%, -76%);
-  }
-}
-
-@keyframes float4 {
-  from {
-    transform: translate(44%, 66%);
-  }
-  to {
-    transform: translate(-82%, -39%);
-  }
-}
-
-@keyframes float5 {
-  from {
-    transform: translate(17%, 70%);
-  }
-  to {
-    transform: translate(-22%, -44%);
-  }
-}
-
-@keyframes float6 {
-  from {
-    transform: translate(10%, 68%);
-  }
-  to {
-    transform: translate(-33%, -66%);
+  100% {
+    top: 12%;
+    left: 8%;
+    transform: translate(-8%, -12%);
   }
 }
