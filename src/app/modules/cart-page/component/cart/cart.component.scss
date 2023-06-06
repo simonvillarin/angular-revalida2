@@ -29,9 +29,10 @@
 }
 
 .input-group input {
-    max-width: 40px;
+    max-width: 35px;
     height: 30px;
     padding: 5px;
+    text-align: center;
 }
 
 .input-group input:focus {
@@ -90,7 +91,7 @@
 
 .checkoutBtn {
     border-radius: 0px;
-    max-width: 130px;
+    max-width: 150px;
     height: 35px;
-    margin-left: 10px;
+    margin-left: 5px;
 }
