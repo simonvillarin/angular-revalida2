@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 
+
 export interface PCParts {
   item: string;
   position: number;
@@ -9,36 +10,13 @@ export interface PCParts {
   totalSales: number;
 }
 
+
 const ELEMENT_DATA: PCParts[] = [
-  {
-    position: 1,
-    item: 'Notebooks',
-    price: 1750.0,
-    qtySold: 90,
-    totalSales: 157500,
-  },
-  { position: 2, item: 'SSD', price: 4026.0, qtySold: 70, totalSales: 281820 },
-  {
-    position: 3,
-    item: 'Keyboard',
-    price: 691.65,
-    qtySold: 50,
-    totalSales: 34582.5,
-  },
-  {
-    position: 4,
-    item: 'Mother Board',
-    price: 9012.2,
-    qtySold: 30,
-    totalSales: 270366,
-  },
-  {
-    position: 5,
-    item: 'Desktop',
-    price: 108.11,
-    qtySold: 10,
-    totalSales: 1081.1,
-  },
+  { position: 1, item: 'Notebooks', price: 1750.00, qtySold: 90, totalSales: 157500 },
+  { position: 2, item: 'SSD', price: 4026.00, qtySold: 70, totalSales: 281820 },
+  { position: 3, item: 'Keyboard', price: 691.65, qtySold: 50, totalSales: 34582.5 },
+  { position: 4, item: 'Mother Board', price: 9012.20, qtySold: 30, totalSales: 270366 },
+  { position: 5, item: 'Desktop', price: 108.11, qtySold: 10, totalSales: 1081.1 }
 ];
 
 @Component({
@@ -47,6 +25,9 @@ const ELEMENT_DATA: PCParts[] = [
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
+
+
+
   isShowMenu: boolean = false;
 
   toggleMenu() {
@@ -65,9 +46,9 @@ export class DashboardComponent implements OnInit {
           fill: false,
           borderColor: 'rgb(75, 192, 192)',
           backgroundColor: 'rgb(76, 175, 80)',
-          tension: 0.1,
-        },
-      ],
+          tension: 0.1
+        }
+      ]
     };
 
     new Chart('lineChart', {
@@ -77,10 +58,10 @@ export class DashboardComponent implements OnInit {
         responsive: true,
         scales: {
           y: {
-            beginAtZero: true,
-          },
-        },
-      },
+            beginAtZero: true
+          }
+        }
+      }
     });
   }
 
@@ -109,8 +90,8 @@ export class DashboardComponent implements OnInit {
       columnDef: 'totalSales',
       header: 'Total Sales',
       cell: (element: PCParts) => `${element.totalSales}`,
-    },
+    }
   ];
   dataSource = ELEMENT_DATA;
-  displayedColumns = this.columns.map((c) => c.columnDef);
+  displayedColumns = this.columns.map(c => c.columnDef);
 }

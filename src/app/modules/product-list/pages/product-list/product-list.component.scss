@@ -8,7 +8,7 @@
 .sidebar {
   position: sticky;
   top: 0;
-  min-height: calc(100vh - 4rem);
+  height: 100vh;
   padding: 0 1rem;
   box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.25);
 }
@@ -109,12 +109,12 @@ header {
   width: 6rem;
 }
 
-.icon > span {
+.icon>span {
   display: none;
   font-size: 0.75rem;
 }
 
-.icon:hover > span {
+.icon:hover>span {
   display: block;
 }
 
@@ -191,16 +191,20 @@ i {
 
 .form-select {
   border: none;
-  border-bottom: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.form-select:focus{
+  box-shadow: inset 0px -10px 20px -10px rgba(198, 253, 211, 0.75);
 }
 
 .form-control {
   border: none;
-  border-bottom: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.form-control:focus {
+  box-shadow: inset 0px -10px 10px -10px rgba(198, 253, 211, 0.75);
 }
 
 .form-group {
@@ -220,7 +224,6 @@ label {
   }
 }
 
-.btn{
+.btn {
   width: 100%;
 }
-
