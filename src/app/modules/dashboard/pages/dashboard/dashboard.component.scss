@@ -8,7 +8,7 @@
 .sidebar {
   position: sticky;
   top: 0;
-  min-height: calc(100vh - 4rem);
+  height: 100vh;
   padding: 0 1rem;
   box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.25);
 }
@@ -173,7 +173,6 @@ i {
   }
 }
 
-
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -228,10 +227,10 @@ i {
   text-align: center;
 }
 
-#lineChart{
+#lineChart {
   height: 200px;
 }
-.chartCanvas{
+.chartCanvas {
   margin-top: 1.1rem;
   width: 100%;
 }
@@ -242,7 +241,7 @@ i {
   width: auto;
 }
 
-.tblCard{
+.tblCard {
   margin-top: 1.1rem;
   width: 100%;
   // height: 100%;
@@ -264,13 +263,11 @@ i {
 
 .demo-table {
   width: 100%;
-  min-width: 400px; 
+  min-width: 400px;
 }
-
 
 .title {
   font-size: 32px;
   font-weight: bold;
   margin-bottom: 1.3rem;
 }
-
