@@ -4,6 +4,9 @@ import { ProductListComponent } from './pages/product-list/product-list.componen
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { ProductListRoutingModule } from './product-list-routing.module';
+import { MatTableModule} from '@angular/material/table';
+import { MatPaginatorModule} from '@angular/material/paginator';
+
 
 @NgModule({
   declarations: [ProductListComponent],
@@ -12,6 +15,10 @@ import { ProductListRoutingModule } from './product-list-routing.module';
     MatIconModule,
     RouterModule,
     ProductListRoutingModule,
+    MatPaginatorModule,
+    MatTableModule,
   ],
 })
-export class ProductListModule {}
+export class ProductListModule {
+
+}
