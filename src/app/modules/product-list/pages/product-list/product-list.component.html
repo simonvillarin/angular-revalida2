@@ -51,7 +51,8 @@
                   </select>
                   <input id="brand" class="form-control" type="text" *ngIf="showAddBrand" [(ngModel)]="newBrand"
                     [ngModelOptions]="{standalone: true}" placeholder="New Brand">
-                  <button class="btn btn-primary" *ngIf="showAddBrand" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
+                  <button class="btn btn-primary" *ngIf="showAddBrand" data-bs-toggle="modal"
+                    data-bs-target="#brandModal">Add</button>
                 </div>
               </div>
               <div class="col col-md-4">
@@ -65,7 +66,8 @@
                   </select>
                   <input id="category" class="form-control" type="text" *ngIf="showAddOption" [(ngModel)]="newOption"
                     [ngModelOptions]="{standalone: true}" placeholder="New Category">
-                  <button class="btn btn-primary" (click)="addNewOption()" *ngIf="showAddOption" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
+                  <button class="btn btn-primary"  *ngIf="showAddOption" data-bs-toggle="modal"
+                    data-bs-target="#categoryModal">Add</button>
                 </div>
                 <!-- Image -->
                 <div class="form-group">
@@ -97,14 +99,13 @@
         </div>
       </div>
 
-      <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" 
-           aria-labelledby="exampleModalLabel" aria-hidden="true" 
-           *ngIf="(showBrandModal)">
+      <!-- Brand Modal -->
+      <div class="modal fade" id="brandModal" tabindex="-1" aria-labelledby="brandModalLabel" aria-hidden="true"
+        *ngIf="(showBrandModal)">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Add Brand</h1>
+              <h1 class="modal-title fs-5" id="brandModalLabel">Add Brand</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -112,7 +113,29 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary"  (click)="addBrand()" data-bs-dismiss="modal">Save changes</button>
+              <button type="button" class="btn btn-primary" (click)="addBrand()" data-bs-dismiss="modal">Save
+                changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Brand Modal -->
+      <div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="categoryModalLabel" aria-hidden="true"
+        *ngIf="(showCategoryModal)">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="categoryModalLabel">Add Category</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Are you do you want to add {{newOption}} as new Option for category?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" (click)="addNewOption()" data-bs-dismiss="modal">Save
+                changes</button>
             </div>
           </div>
         </div>
