@@ -172,3 +172,55 @@ i {
     display: flex;
   }
 }
+
+.card-header {
+  background-color: rgb(76, 175, 80);
+}
+
+.card {
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2.5rem;
+}
+
+.card-title {
+  margin-top: 1rem;
+  font-size: 24px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.form-select {
+  border: none;
+  border-bottom: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-control {
+  border: none;
+  border-bottom: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin: 1.1rem 2rem 1.5rem 0.7rem;
+  max-width: 300px;
+}
+
+label {
+  margin-bottom: 1.3rem;
+  text-indent: 0.8em;
+  font-size: 16px;
+}
+
+@media (min-width: 576px) {
+  .form-group {
+    max-width: none;
+  }
+}
+
+.btn{
+  width: 100%;
+}
+
