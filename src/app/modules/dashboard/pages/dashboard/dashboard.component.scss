@@ -227,10 +227,10 @@ i {
   text-align: center;
 }
 
-#lineChart {
+#lineChart{
   height: 200px;
 }
-.chartCanvas {
+.chartCanvas{
   margin-top: 1.1rem;
   width: 100%;
 }
@@ -241,7 +241,7 @@ i {
   width: auto;
 }
 
-.tblCard {
+.tblCard{
   margin-top: 1.1rem;
   width: 100%;
   // height: 100%;
@@ -259,15 +259,24 @@ i {
   overflow-x: auto;
   width: 100%;
   max-width: 100%;
+  border-radius: 5px;
 }
 
-.demo-table {
-  width: 100%;
-  min-width: 400px;
-}
+// .demo-table {
+//   width: 100%;
+//   min-width: 800px; 
+// }
 
 .title {
   font-size: 32px;
   font-weight: bold;
   margin-bottom: 1.3rem;
 }
+
+table th {
+  background-color: rgb(76, 175, 80);
+  color: #fff;
+  font-size: 18px;
+}
+
+

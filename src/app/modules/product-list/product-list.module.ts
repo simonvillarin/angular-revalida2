@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { ProductListRoutingModule } from './product-list-routing.module';
 import { MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule} from '@angular/material/paginator';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { MatPaginatorModule} from '@angular/material/paginator';
     ProductListRoutingModule,
     MatPaginatorModule,
     MatTableModule,
+    FormsModule,
   ],
 })
 export class ProductListModule {

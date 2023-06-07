@@ -87,4 +87,57 @@ export class ProductListComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
+
+  categoryOptions: string[] = ['Desktop', 'Notebook', 'Components', 'Peripherals'];
+  showAddOption: boolean = false;
+  newOption: string | undefined;
+  showCategoryModal: boolean = false;
+
+  onOptionSelected(event: any) {
+    const selectedValue = event.target.value;
+    if (selectedValue === 'add') {
+      this.showAddOption = true;
+      this.showCategoryModal = true;
+    } else {
+      this.showAddOption = false;
+      this.showCategoryModal = false;
+    }
+  }
+  
+  addNewOption() {
+    console.log(this.newOption);
+    if (this.newOption && !this.categoryOptions.includes(this.newOption)) {
+      this.categoryOptions.push(this.newOption);
+      this.newOption = '';
+      this.showAddOption = false;
+      this.showCategoryModal = false;
+    }
+    console.log(this.categoryOptions);
+  }
+
+  brandOptions: string[] = ['Asus', 'Real Me', 'Dell', 'Lenovo'];
+  showAddBrand: boolean = false;
+  newBrand: string | undefined;
+  showBrandModal: boolean = false;
+
+  onBrandSelected(event: any) {
+    const selectedValue = event.target.value;
+    if (selectedValue === 'add') {
+       this.showAddBrand = true;
+      this.showBrandModal = true;
+    } else {
+       this.showAddBrand = false;
+      this.showBrandModal = false;
+    }
+  }
+  
+  addBrand() {
+    console.log(this.newBrand);
+    if (this.newBrand && !this.brandOptions.includes(this.newBrand)) {
+      this.brandOptions.push(this.newBrand);
+      this.newBrand = '';
+      this.showAddBrand = false;
+    }
+    console.log(this.brandOptions);
+  }
 }
