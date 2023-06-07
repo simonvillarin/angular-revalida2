@@ -1,12 +1,19 @@
 .container {
-    width: 100%;
-    padding: 20px;
+    background-color: rgb(233, 253, 233);
+    max-width: 100%;
+    padding-bottom: 20px;
 }
 
 .title {
     border-bottom: 1px solid rgb(222, 221, 221);
-    margin-bottom: 50px;
-    margin-top: 20px;
+    margin-bottom: 15px;
+    padding: 20px;
+}
+
+.prodCont {
+    background-color: white;
+    margin: 15px;
+    padding: 15px;
 }
 
 .col1 div {
@@ -115,11 +122,13 @@
 // Nav-tabs
 .descCont {
     border: 1px solid #cccccd;
-    margin-left: 1px;
+    background-color: #ffffff;
+    margin: 15px;
     margin-top: 45px;
 }
 
 .col-md-4 ul .nav-link {
+    background-color: rgb(233, 249, 233);
     border-bottom: 1px solid #cccccd;
     border-right: 1px solid #cccccd;
     border-radius: 0;
@@ -129,7 +138,7 @@
 }
   
 .col-md-4 ul .nav-link.active {
-    background-color: rgb(233, 249, 233);
+    background-color: rgb(255, 255, 255);
     border-right: none;
     color: green;
 }
@@ -138,8 +147,13 @@
     color: rgb(30, 179, 30);
 }
 
-.col-md-8 .tab-content {
-    margin: 15px
+.col-md-8 .tab-content-height {
+    padding: 0px;
+    height: 100%;
+}
+
+.tab-pane {
+    padding: 15px;
 }
 
 .tab-content .tab-pane .list li::before {
@@ -147,4 +161,70 @@
     display: inline-block;
     width: 1em;
     margin-left: -1em;
+}
+
+// Rating
+.ratingReviewCont {
+    background-color: #ffffff;
+    margin: 15px;
+    padding: 0px;
+}
+
+.ratingReviewCont .col-12 {
+    background-color: rgb(248, 243, 243);
+}
+
+.ratingReviewCont .col-12 h3{
+    margin: 5px 25px 5px 0px
+}
+
+ngb-rating {
+    color: #FFC107;
+    font-size: 20px;
+}
+
+.ratingIcon {
+    margin-left: 6px;
+    margin-bottom: 10px;
+    font-size: 30px;
+}
+
+.ratingCont {
+    margin: 0px;
+    padding: 20px 20px 0px 20px;
+    border-bottom: 1px solid rgb(212, 211, 211);
+}
+
+.ratingCont div {
+    margin-bottom: 10px;
+}
+
+.ratingAveLbl {
+    margin-left: 8px;
+    font-size: x-large;
+    font-weight: 600;
+}
+
+.ratingCountLbl{
+    margin-left: 10px;
+    color: rgb(37, 199, 37);
+}
+
+.prodFilterCont {
+    border-bottom: 1px solid rgb(212, 211, 211);
+    padding-left: 15px;
+}
+
+.prodFilterCont h3{
+    margin: 5px 0px 5px 0px;
+}
+
+.userReviewCont {
+    border-bottom: 1px solid rgb(212, 211, 211);
+    padding: 20px;
+    margin: 0px;
+}
+
+.comment {
+    font-weight: 400;
 }
