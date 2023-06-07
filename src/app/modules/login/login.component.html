@@ -18,9 +18,9 @@
           <!-- Validation -->
           <div
             class="validation"
-            *ngIf="username?.invalid && username?.dirty && username?.errors?.['required']"
+            *ngIf="username?.invalid && (username?.dirty || username?.touched)"
           >
-            Username is required.
+            <p *ngIf="username?.errors?.['required']">Username is required.</p>
           </div>
         </div>
 
@@ -34,7 +34,7 @@
             required
           />
           <!-- Validation -->
-          <div class="validation" *ngIf="password?.invalid && password?.dirty">
+          <div class="validation" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
             <div *ngIf="password?.errors?.['required']">
               Password is required.
             </div>

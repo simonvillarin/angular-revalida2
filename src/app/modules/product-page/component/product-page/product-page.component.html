@@ -1,9 +1,9 @@
 <app-header></app-header>
 <div class="container" *ngFor="let prod of products">
     <div class="title">
-        <h1 class="mb-4">Product Details</h1>
+        <h1>Product Details</h1>
     </div>
-    <div class="row mt-4">
+    <div class="row mt-4 prodCont">
         <!-- Product Image -->
         <div class="col-sm-5 col1">
             <div class="text-center">
@@ -16,6 +16,11 @@
             <div>
                 <h2>{{ prod.prodName }}</h2>
                 <hr/>
+                <div class="rating">
+                    <ngb-rating [max]="5" [rate]="aveUserRating" [readonly]="true"></ngb-rating>
+                    <!-- Count Ratings -->
+                    <label class="ratingCountLbl">{{ userCount }} Ratings</label>
+                </div>
                 <h1>₱{{ prod.prodPrice }}</h1>
             </div>
             <div class="row mt-2">
@@ -60,9 +65,9 @@
                 </li>
             </ul>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8 p-0">
             <div class="tab-content">
-                <div class="tab-pane fade" [ngClass]="{ 'show active': activeTab === 'description' }" id="description">
+                <div class="tab-pane fade" [ngClass]="{ 'show active': activeTab === 'description' }" id="description" >
                     <ng-container>
                         <ul class="list">
                             <li>{{ prod.description }}</li>
@@ -76,6 +81,98 @@
                         </ul>
                     </ng-container>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ratings And Review -->
+    <div class="row border ratingReviewCont">
+        <div class="col-12">
+            <h3>Ratings and Reviews</h3>
+        </div>
+        <div class="col p-0">
+            <div class="ratingCont">
+                <div>
+                    <label class="ratingAveLbl">{{ aveUserRating }}/</label><label>5</label>
+                </div>
+                <ngb-rating [max]="5" [rate]="aveUserRating" [readonly]="true" class="ratingIcon"></ngb-rating>
+                <p class="ratingCountLbl">{{ userCount }} Ratings</p>
+            </div>
+            <div class="prodFilterCont">
+                <h3>Product Reviews</h3>
+            </div>
+            <!-- User Reviews -->
+            <div>
+                <div *ngFor="let rateReview of userRatingsReview">
+                    <div *ngIf="rateReview?.prodName === prodName" class="userReviewCont">
+                        <div class="row">
+                            <div class="col">
+                                <ngb-rating 
+                                    [max]="5" 
+                                    [rate]=rateReview?.rating 
+                                    [readonly]="true"
+                                ></ngb-rating>
+                            </div>
+                            <div class="col d-flex justify-content-end">
+                                <p >{{ rateReview?.date }}</p>
+                            </div>
+                        </div>
+                        <p>{{ rateReview?.username }}</p>
+                        <p class="comment">{{ rateReview?.comment }}</p>
+                        <div class="reviewImgCont">
+                            <div class="row ms-1">
+                                <div class="col-2 me-1 border" *ngFor="let img of rateReview?.images">
+                                    <img 
+                                    [src]="img" 
+                                    alt="review image" 
+                                    class="img-fluid"
+                                    data-bs-toggle="modal"
+                                    [attr.data-bs-target]="'#imageModal' + rateReview?.id"
+                                    >
+                                    <div 
+                                        class="modal fade" 
+                                        [id]="'imageModal' + rateReview?.id" 
+                                        tabindex="-1" 
+                                        aria-labelledby="imageModalLabel" 
+                                        aria-hidden="true"
+                                    >
+                                    <div class="modal-dialog modal-dialog-centered modal-l">
+                                        <div class="modal-content">
+                                        <div class="modal-body text-center">
+                                            <img 
+                                                [src]="img" 
+                                                alt="review image" 
+                                                class="img-fluid"
+                                            >
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Pagination -->
+            <div class="d-flex justify-content-center">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination m-2">
+                        <li class="page-item">
+                            <a class="page-link" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link">1</a></li>
+                        <li class="page-item"><a class="page-link">2</a></li>
+                        <li class="page-item"><a class="page-link">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>

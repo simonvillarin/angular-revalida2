@@ -15,7 +15,6 @@ import {
 export class LoginComponent implements OnInit{
 
   //password icon
-  hide = true;
   customColor = '#4CAF50';
   image = 'login/src/assets/images/img.svg'
 
@@ -48,7 +47,7 @@ export class LoginComponent implements OnInit{
 
   onSubmit = () => {
     if(this.loginForm.valid) {
-      this.router.navigate(['login']);
+      // this.router.navigate(['login']);
       console.log('Successfully logged in.')
     }
   }
