@@ -161,4 +161,23 @@ export class UserListComponent implements AfterViewInit{
     this.dataSource.paginator = this.paginator;
   }
   
+  options: string[] = ['Option 1', 'Option 2', 'Option 3'];
+  showAddOption: boolean = false;
+  newOption: string | undefined;
+
+  onOptionSelected(event: any) {
+    if (event.value === 'add') {
+      this.showAddOption = true;
+    } else {
+      this.showAddOption = false;
+    }
+  }
+
+  addNewOption() {
+    if (this.newOption && !this.options.includes(this.newOption)) {
+      this.options.push(this.newOption);
+      this.newOption = '';
+      this.showAddOption = true;
+    }
+  }
 }

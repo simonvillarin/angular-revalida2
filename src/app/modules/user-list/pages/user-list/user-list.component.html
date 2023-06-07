@@ -31,7 +31,7 @@
       <!-- Form -->
       <div class="card">
         <div class="card-header">
-          <h5 class="card-title">Products List</h5>
+          <h5 class="card-title">User's Information</h5>
         </div>
         <div class="card-body">
           <form>
@@ -63,7 +63,7 @@
               <div class="col col-md">
                 <div class="form-group">
                   <label>Interest</label>
-                  <input class="form-control" type="text" #interestInput placeholder="New Interest..."
+                  <input class="form-control  border-bottom" type="text" #interestInput placeholder="New Interest..."
                     [formControl]="interestCtrl" [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)" />
                   <mat-chip-grid #chipGrid aria-label="Interest selection">
@@ -113,7 +113,7 @@
               </div>
               <div class="col col-md">
                 <div class="form-group">
-                  <label>confirm Password</label>
+                  <label>Confirm Password</label>
                   <input type="password" class="form-control border-bottom" placeholder="Confirm Password">
                 </div>
               </div>
@@ -127,7 +127,7 @@
 
       <div class="card">
         <div class="card-header">
-          <h5 class="card-title">Products List</h5>
+          <h5 class="card-title">Users List</h5>
         </div>
         <div class="card-body">
           <div class="form-group">
@@ -188,9 +188,31 @@
               aria-label="Select page of periodic elements">
             </mat-paginator>
           </div>
+        </div>
+      </div>
+
+
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">Products List</h5>
+        </div>
+        <div class="card-body">
+          <mat-form-field>
+            <mat-select (selectionChange)="onOptionSelected($event)">
+              <mat-option *ngFor="let option of options" [value]="option">{{ option }}</mat-option>
+              <mat-option value="add">Add Option</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field *ngIf="showAddOption">
+            <input matInput [(ngModel)]="newOption" placeholder="New Option">
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" (click)="addNewOption()" *ngIf="showAddOption">Add</button>
 
         </div>
       </div>
+
 
     </div>
   </main>
