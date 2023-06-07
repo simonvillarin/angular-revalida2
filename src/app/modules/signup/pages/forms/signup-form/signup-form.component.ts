@@ -13,11 +13,13 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
   styleUrls: ['./signup-form.component.scss']
 })
 export class SignupFormComponent {
-
+  // Form Groups
   signupForm: FormGroup;
   personalInfoForm: FormGroup;
   loginCredentialForm: FormGroup;
-  
+  addressInfoForm:  FormGroup;
+
+  // Password Field
   showPassword = false;
   showConfirmPassword = false;
   passwordMatch = true;
@@ -47,6 +49,16 @@ export class SignupFormComponent {
       birthdate: [null, [Validators.required]],
     });
 
+    this.addressInfoForm = this.fb.group({
+      houseNo: ['', Validators.required],
+      buildingName: [''],
+      streetName: ['', Validators.required],
+      brgy:['', Validators.required],
+      city: ['', Validators.required],
+      zipCode: ['', Validators.required],
+      Province: ['', Validators.required],
+    })
+
     this.loginCredentialForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       username: ['', Validators.required],
@@ -56,13 +68,14 @@ export class SignupFormComponent {
 
     this.signupForm = this.fb.group({
       personalInfoForm: this.personalInfoForm,
+      addressInfoForm: this.addressInfoForm,
       loginCredentialForm: this.loginCredentialForm
     });
 
-    this.signupForm.get('password')?.valueChanges.subscribe(() => {
+    this.loginCredentialForm.get('password')?.valueChanges.subscribe(() => {
       this.checkPasswordMatch();
     });
-    this.signupForm.get('confirmPass')?.valueChanges.subscribe(() => {
+    this.loginCredentialForm.get('confirmPass')?.valueChanges.subscribe(() => {
       this.checkPasswordMatch();
     });
     this.filteredInterests = this.interestCtrl.valueChanges.pipe(
@@ -131,21 +144,23 @@ export class SignupFormComponent {
 
   // validator
   getErrorMessage(): string {
-    const emailControl = this.signupForm.get('email');
+    const emailControl = this.loginCredentialForm.get('email');
     if (emailControl && emailControl.hasError('required')) {
       return 'Email is Required';
     }
     return emailControl && emailControl.hasError('email') ? 'Not a valid email' : '';
   }
 
+ 
+
   checkPasswordMatch(): void {
-    const password = this.signupForm.get('password')?.value;
-    const confirmPassword = this.signupForm.get('confirmPass')?.value;
+    const password = this.loginCredentialForm.get('password')?.value;
+    const confirmPassword = this.loginCredentialForm.get('confirmPass')?.value;
     this.passwordMatch = password === confirmPassword;
     if (!this.passwordMatch) {
-      this.signupForm.get('confirmPass')?.setErrors({ passwordMismatch: true });
+      this.loginCredentialForm.get('confirmPass')?.setErrors({ passwordMismatch: true });
     } else {
-      this.signupForm.get('confirmPass')?.setErrors(null);
+      this.loginCredentialForm.get('confirmPass')?.setErrors(null);
     }
   }
 
@@ -159,13 +174,13 @@ export class SignupFormComponent {
 
   onSubmit(): void {
     const user: User = {
-      firstName: this.signupForm.value.firstName,
-      lastName: this.signupForm.value.lastName,
-      middleName: this.signupForm.value.middleName,
-      email: this.signupForm.value.email,
-      birthdate: this.signupForm.value.birthdate,
-      username: this.signupForm.value.username,
-      password: this.signupForm.value.password,
+      firstName: this.personalInfoForm.value.firstName,
+      lastName: this.personalInfoForm.value.lastName,
+      middleName: this.personalInfoForm.value.middleName,
+      birthdate: this.personalInfoForm.value.birthdate,
+      email: this.loginCredentialForm.value.email,
+      username: this.loginCredentialForm.value.username,
+      password: this.loginCredentialForm.value.password,
       listOfInterest: this.interests,
     };
 
@@ -174,8 +189,8 @@ export class SignupFormComponent {
       return;
     }
 
-    const dateOnly = this.datePipe.transform(this.selectedDate, 'yyyy-MM-dd');
-    this.signupForm.patchValue({ birthdate: dateOnly });
+     const dateOnly = this.datePipe.transform(this.selectedDate, 'yyyy-MM-dd');
+     this.signupForm.patchValue({ birthdate: dateOnly });
 
     console.log(this.interests);
     console.log('User:', user);
