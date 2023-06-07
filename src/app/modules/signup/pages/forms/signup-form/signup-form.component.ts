@@ -6,6 +6,8 @@ import { UserService } from '../../../services/user.service';
 import { User } from '../../../models/user';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { birthdateValidator, hasLowercaseValidator, hasNumberValidator, hasSymbolValidator, hasUppercaseValidator, maxLengthValidator } from 'src/app/modules/validators/custom.validator';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-signup-form',
@@ -13,11 +15,13 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
   styleUrls: ['./signup-form.component.scss']
 })
 export class SignupFormComponent {
-
+  // Form Groups
   signupForm: FormGroup;
   personalInfoForm: FormGroup;
   loginCredentialForm: FormGroup;
-  
+  addressInfoForm:  FormGroup;
+
+  // Password Field
   showPassword = false;
   showConfirmPassword = false;
   passwordMatch = true;
@@ -33,10 +37,12 @@ export class SignupFormComponent {
   interests: string[] = [];
   allInterests: string[] = ['Desktop PC', 'Notebooks', 'Computer Components', 'Computer Peripherals', 'Accessories'];
   @ViewChild('interestInput') interestInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('stepper') stepper!: MatStepper;
+
 
   constructor(
     private fb: FormBuilder,
-    private datePipe: DatePipe,
+    // private datePipe: DatePipe,
     private userService: UserService
   ) {
 
@@ -44,25 +50,48 @@ export class SignupFormComponent {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       middleName: [''],
-      birthdate: [null, [Validators.required]],
+      birthdate: ['', [
+        Validators.required,
+        birthdateValidator()]],
     });
+
+    this.addressInfoForm = this.fb.group({
+      houseNo: ['', Validators.required],
+      buildingName: [''],
+      streetName: ['', Validators.required],
+      brgy:['', Validators.required],
+      city: ['', Validators.required],
+      zipCode: ['', [
+        Validators.required,
+        maxLengthValidator()
+      ]],
+      Province: ['', Validators.required],
+    })
 
     this.loginCredentialForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       username: ['', Validators.required],
-      password: ['', Validators.required],
+      password: ['', 
+        [Validators.required,
+        Validators.minLength(8),
+        hasNumberValidator(),
+        hasLowercaseValidator(),
+        hasUppercaseValidator(),
+        hasSymbolValidator(),
+      ]],
       confirmPass: ['', Validators.required],
     });
 
     this.signupForm = this.fb.group({
       personalInfoForm: this.personalInfoForm,
+      addressInfoForm: this.addressInfoForm,
       loginCredentialForm: this.loginCredentialForm
     });
 
-    this.signupForm.get('password')?.valueChanges.subscribe(() => {
+    this.loginCredentialForm.get('password')?.valueChanges.subscribe(() => {
       this.checkPasswordMatch();
     });
-    this.signupForm.get('confirmPass')?.valueChanges.subscribe(() => {
+    this.loginCredentialForm.get('confirmPass')?.valueChanges.subscribe(() => {
       this.checkPasswordMatch();
     });
     this.filteredInterests = this.interestCtrl.valueChanges.pipe(
@@ -85,6 +114,11 @@ export class SignupFormComponent {
     return firstNameValid && lastNameValid && birthdateValid && interestsValid;
   }
   
+  resetStepper() {
+    this.stepper.reset();
+    this.interests = []; 
+    this.interestInput.nativeElement.value = '';
+  }
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
@@ -131,41 +165,45 @@ export class SignupFormComponent {
 
   // validator
   getErrorMessage(): string {
-    const emailControl = this.signupForm.get('email');
+    const emailControl = this.loginCredentialForm.get('email');
     if (emailControl && emailControl.hasError('required')) {
       return 'Email is Required';
     }
     return emailControl && emailControl.hasError('email') ? 'Not a valid email' : '';
   }
-
+ 
   checkPasswordMatch(): void {
-    const password = this.signupForm.get('password')?.value;
-    const confirmPassword = this.signupForm.get('confirmPass')?.value;
+    const confirmPasswordControl = this.loginCredentialForm.get('confirmPass');
+    const password = this.loginCredentialForm.get('password')?.value;
+    const confirmPassword = confirmPasswordControl?.value;
     this.passwordMatch = password === confirmPassword;
-    if (!this.passwordMatch) {
-      this.signupForm.get('confirmPass')?.setErrors({ passwordMismatch: true });
-    } else {
-      this.signupForm.get('confirmPass')?.setErrors(null);
+    if (confirmPasswordControl?.dirty || confirmPasswordControl?.touched) {
+      if (!this.passwordMatch) {
+        confirmPasswordControl.setErrors({ passwordMismatch: true });
+      } else {
+        confirmPasswordControl.setErrors(null);
+      }
     }
   }
+  
 
-  formatDate(date: Date | null): string {
-    if (!date) return '';
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    return `${month}/${day}/${year}`;
-  }
+  // formatDate(date: Date | null): string {
+  //   if (!date) return '';
+  //   const year = date.getFullYear();
+  //   const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  //   const day = date.getDate().toString().padStart(2, '0');
+  //   return `${month}/${day}/${year}`;
+  // }
 
   onSubmit(): void {
     const user: User = {
-      firstName: this.signupForm.value.firstName,
-      lastName: this.signupForm.value.lastName,
-      middleName: this.signupForm.value.middleName,
-      email: this.signupForm.value.email,
-      birthdate: this.signupForm.value.birthdate,
-      username: this.signupForm.value.username,
-      password: this.signupForm.value.password,
+      firstName: this.personalInfoForm.value.firstName,
+      lastName: this.personalInfoForm.value.lastName,
+      middleName: this.personalInfoForm.value.middleName,
+      birthdate: this.personalInfoForm.value.birthdate,
+      email: this.loginCredentialForm.value.email,
+      username: this.loginCredentialForm.value.username,
+      password: this.loginCredentialForm.value.password,
       listOfInterest: this.interests,
     };
 
@@ -174,8 +212,8 @@ export class SignupFormComponent {
       return;
     }
 
-    const dateOnly = this.datePipe.transform(this.selectedDate, 'yyyy-MM-dd');
-    this.signupForm.patchValue({ birthdate: dateOnly });
+    //  const dateOnly = this.datePipe.transform(this.selectedDate, 'yyyy-MM-dd');
+    //  this.signupForm.patchValue({ birthdate: dateOnly });
 
     console.log(this.interests);
     console.log('User:', user);
