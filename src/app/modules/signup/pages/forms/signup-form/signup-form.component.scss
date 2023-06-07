@@ -98,6 +98,13 @@ svg {
   margin-top: 20px;
 }
 
+.validation {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  color: red;
+}
+
 .btn {
   color: #fff;
   font-family: 'Lexend Deca', sans-serif;

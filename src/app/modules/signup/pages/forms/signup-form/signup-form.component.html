@@ -9,8 +9,7 @@
             <!-- Form -->
             <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
                 <div class="stepper-wrapper">
-                    <mat-stepper labelPosition="bottom"  #stepper
-                        class="responsive-stepper">
+                    <mat-stepper labelPosition="bottom" linear #stepper class="responsive-stepper">
                         <!-- linear="isPersonalInfoValid()" -->
                         <!-- Step 1 Personal Info -->
                         <mat-step [stepControl]="personalInfoForm" label="Personal Information">
@@ -54,11 +53,18 @@
                                         <div class="form-group">
                                             <label>Birthday</label>
                                             <input type="date" class="form-control border-bottom"
-                                                formControlName="birthdate" [value]="formatDate(selectedDate)"> 
-                                            <mat-error
+                                                formControlName="birthdate">
+                                            <div class="validation"
                                                 *ngIf="personalInfoForm.get('birthdate')?.invalid && (personalInfoForm.get('birthdate')?.dirty || personalInfoForm.get('birthdate')?.touched)">
-                                                Birthday is required
-                                            </mat-error>
+                                                <div *ngIf="personalInfoForm.get('birthdate')?.hasError('required')">
+                                                    Birthday is required
+                                                </div>
+                                                <div *ngIf="personalInfoForm.get('birthdate')?.hasError('futureDate')">
+                                                    Birthday cannot be today or in the future.
+                                                </div>
+                                            </div>
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -171,10 +177,15 @@
                                             <label>Zip Code</label>
                                             <input type="number" class="form-control border-bottom"
                                                 formControlName="zipCode">
-                                            <mat-error
-                                                *ngIf="addressInfoForm.get('zipCode')?.invalid && addressInfoForm.get('zipCode')?.touched">
-                                                Zip Code is Required
-                                            </mat-error>
+                                            <div class="validation"
+                                                *ngIf="addressInfoForm.get('zipCode')?.invalid && (addressInfoForm.get('zipCode')?.dirty || addressInfoForm.get('zipCode')?.touched)">
+                                                <div *ngIf="addressInfoForm.get('zipCode')?.hasError('required')">
+                                                    Zip Code is Required.
+                                                </div>
+                                                <div *ngIf="addressInfoForm.get('zipCode')?.hasError('maxLength')">
+                                                    Invalid Zip Code.
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -191,9 +202,10 @@
                                             </mat-error>
                                         </div>
                                     </div>
-                                </div>
-                                <button type="button" class="btn btn-success" matStepperNext>
-                                    <!-- [disabled]="personalInfoForm.invalid || interests.length < 3" -->
+                                </div>"
+                                <button type="button" class="btn btn-success" matStepperNext
+                                    [disabled]="addressInfoForm.invalid">
+
                                     Next
                                 </button>
                             </form>
@@ -207,9 +219,10 @@
 
                                     <div class="form-group">
                                         <label>Email</label>
-                                        <input type="email" class="form-control border-bottom" placeholder="email@example.com" formControlName="email"
-                                            required>
-                                        <mat-error *ngIf="loginCredentialForm.get('email')?.invalid && loginCredentialForm.get('email')?.touched">{{getErrorMessage()}}</mat-error>
+                                        <input type="email" class="form-control border-bottom"
+                                            placeholder="email@example.com" formControlName="email" required>
+                                        <mat-error
+                                            *ngIf="loginCredentialForm.get('email')?.invalid && loginCredentialForm.get('email')?.touched">{{getErrorMessage()}}</mat-error>
                                     </div>
 
                                 </div>
@@ -217,7 +230,8 @@
                                 <div class="row gx-5">
                                     <div class="form-group">
                                         <label>Username</label>
-                                        <input type="text" class="form-control border-bottom" formControlName="username" required>
+                                        <input type="text" class="form-control border-bottom" formControlName="username"
+                                            required>
                                         <mat-error
                                             *ngIf="loginCredentialForm.get('username')?.invalid && loginCredentialForm.get('username')?.touched">
                                             Username is Required
@@ -229,40 +243,62 @@
                                 <div class="row gx-5">
                                     <div class="form-group">
                                         <label>Password</label>
-                                        <input [type]="showPassword ? 'text' : 'password'" class="form-control border-bottom"  formControlName="password" required>
+                                        <input [type]="showPassword ? 'text' : 'password'"
+                                            class="form-control border-bottom" formControlName="password" required>
                                         <mat-icon matSuffix (click)="togglePasswordVisibility()">visibility</mat-icon>
-                                        <mat-error
-                                            *ngIf="loginCredentialForm.get('password')?.invalid && loginCredentialForm.get('password')?.touched">
-                                            Password is Required
-                                        </mat-error>
+                                        <div class="validation"
+                                            *ngIf="loginCredentialForm.get('password')?.invalid && loginCredentialForm.get('password')?.dirty">
+                                            <div *ngIf="loginCredentialForm.get('password')?.hasError('required')">
+                                                Password is required.
+                                            </div>
+                                            <div *ngIf="loginCredentialForm.get('password')?.hasError('minlength')">
+                                                Password must be 8 characters and above.
+                                            </div>
+                                            <div *ngIf="loginCredentialForm.get('password')?.hasError('hasNumber')">
+                                                It must contain a number.
+                                            </div>
+                                            <div *ngIf="loginCredentialForm.get('password')?.hasError('hasLowercase')">
+                                                It must contain a lowercase letter.
+                                            </div>
+                                            <div *ngIf="loginCredentialForm.get('password')?.hasError('hasUppercase')">
+                                                It must contain an uppercase letter.
+                                            </div>
+                                            <div *ngIf="loginCredentialForm.get('password')?.hasError('hasSymbol')">
+                                                It must contain a symbol.
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- Confirm Password -->
                                 <div class="row gx-5">
                                     <div class="form-group">
                                         <label>Confirm Password</label>
-                                        <input [type]="showConfirmPassword ? 'text' : 'password'" class="form-control border-bottom"    formControlName="confirmPass" required>
-                                     
+                                        <input [type]="showConfirmPassword ? 'text' : 'password'"
+                                            class="form-control border-bottom" formControlName="confirmPass" required>
+
                                         <mat-icon matSuffix
                                             (click)="toggleConfirmPasswordVisibility()">visibility</mat-icon>
-                                        <mat-error
-                                            *ngIf="loginCredentialForm.get('confirmPass')?.errors?.['passwordMismatch']">
-                                            Passwords do not match
-                                        </mat-error>
+                                        <div class="validation"
+                                            *ngIf="loginCredentialForm.get('confirmPass')?.invalid && (loginCredentialForm.get('confirmPass')?.dirty || loginCredentialForm.get('confirmPass')?.touched)">
+                                            <div *ngIf="loginCredentialForm.get('confirmPass')?.hasError('required')">
+                                                Password is required.
+                                            </div>
+                                            <div
+                                                *ngIf="loginCredentialForm.get('confirmPass')?.hasError('passwordMismatch')">
+                                                Passwords do not match.
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-
                                 <div class="button-row">
                                     <button type="button" class="btn btn-secondary" matStepperPrevious>Back</button>
-                                    <button type="button" class="btn btn-danger"
-                                        (click)="stepper.reset()">Reset</button>
+                                    <button type="button" class="btn btn-danger" (click)="resetStepper()">Reset</button>
                                 </div>
                             </form>
                             <button class="btn btn-success" [disabled]="loginCredentialForm.invalid">Sign
                                 Up</button>
                         </mat-step>
                     </mat-stepper>
-                    
                 </div>
             </form>
         </div>
